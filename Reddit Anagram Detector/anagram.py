@@ -44,14 +44,22 @@ Challenge Output
 '''
 
 lines_to_test = ['"wisdom" ? "mid sow"', '"Seth Rogan" ? "Gathers No"', '"Reddit" ? "Eat Dirt"',
-'"Schoolmaster" ? "The classroom"', '"Astronomers" ? "Moon starer"', '"Vacation Times" ? "I\'m Not as Active"',
-'"Dormitory" ? "Dirty Rooms"']
+                 '"Schoolmaster" ? "The classroom"', '"Astronomers" ? "Moon starer"',
+                 '"Vacation Times" ? "I\'m Not as Active"',
+                 '"Dormitory" ? "Dirty Rooms"']
+
+
+def anagram_test(s):
+    # split out each side of the "?", deleting apostrophes and spaces, and sorting by letter
+    left = sorted(s.split('?')[0].replace(' ', '').replace("'", '').lower())
+    right = sorted(s.split('?')[1].replace(' ', '').replace("'", '').lower())
+
+    # simple comparison, then output appropriate line
+    if left == right:
+        print(s.split('?')[0].strip(), 'is an anagram of', s.split('?')[1].strip())
+    else:
+        print(s.split('?')[0].strip(), 'is NOT an anagram of', s.split('?')[1].strip())
+
 
 for line in lines_to_test:
-    left = sorted(line.split('?')[0].replace(' ','').replace("'", '').lower())
-    right = sorted(line.split('?')[1].replace(' ','').replace("'", '').lower())
-    if left == right:
-        print (line.split('?')[0].strip(), 'is an anagram of', line.split('?')[1].strip())
-    else:
-        print(line.split('?')[0].strip(), 'is NOT an anagram of', line.split('?')[1].strip())
-
+    anagram_test(line)
