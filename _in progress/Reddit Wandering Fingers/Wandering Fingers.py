@@ -36,8 +36,40 @@ Double letters in the output word might appear only once in the input string, e.
 Make your program handle this possibility.
 '''
 
+'''
+NOT WORKING YET...
+'''
+
 import urllib.request
 
-url = 'http://example.com/'
+words = []
+possible_words = []
+
+url = 'https://raw.githubusercontent.com/pbeens/challenges/master/cleandict.txt'
 response = urllib.request.urlopen(url)
-data = response.read()
+data = response.readlines()
+
+# create list of words
+for line in data:
+    words.append(line.strip().decode('UTF-8'))
+
+# find possible words
+swype = 'qwertyuytresdftyuioknn'
+for word in words:
+    if len(word) > 4 and word[0] == swype[0] and word[-1:] == swype[-1:]:
+        possible_words.append(word)
+
+print (possible_words)
+
+for word in possible_words:
+    possible = True
+    for c in word:
+        if c not in swype:
+            print (c)
+            possible = False
+    if possible == False:
+        possible_words.remove(word)
+
+print (possible_words)
+
+
